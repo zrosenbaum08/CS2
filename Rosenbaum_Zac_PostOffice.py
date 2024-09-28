@@ -8,7 +8,7 @@ Sources: w3 schools
 '''
 import sys #brings in the sys libray to exit the program if user doesn't meet the parameters
 #package type code
-def get_size(length, height, thickness):    # defines the get_size function that finds the size of the package that takes in varaible length, height, and thickness
+def get_size(length, height, thickness):    # defines the get_size function that finds the size of the package that takes in variable length, height, and thickness
     if length >= 3.5 and length <= 4.25 and height >= 3.5 and height <= 6.0 and thickness >= .007 and thickness <= .016:            #if length is between, 3.5, 4.25, and height is between, 3.5, 6, and thickness is between, .007, .016, then,
         return [.20, .03] #reg post card    # returns the values .20 (steady price) and .03 (price per zipcode zone hop)
     elif length >= 4.25 and length <= 6.0 and height >= 6.0 and height <= 11.5 and thickness >= .007 and thickness <= .015:         #if the prev conditional was not met, check if length is between, 4.25, 6, and height is between, 6, 11.5, and thickness is between, .007, .015, if so, then,
@@ -45,42 +45,42 @@ def main(): # defines the main function to run to carry out the code
                 ''').split(',')          #asks the user to give length,height,thickness,zip1,zip2 and turns into a list by spliting input into elements at each comma 
     try:                                 #checks if the following indented code works
         length = float(dimension[0])     #sets the variable 'length' to a float of the first element of the dimension list
-    except:                              #excepts the folling error from the code
+    except:                              #excepts the following error from the code
         ValueError                       #excepts value error(if someone inputs in letters instead of numbers into the dimension variable)
-        sys.exit("the length of the package must only conatain numbers") #tells the user that the package must soley contain numbers and exits the program
+        sys.exit("the length of the package must only conatain numbers") #tells the user that the package must solely contain numbers and exits the program
 
     try:                                 #checks if the following indented code works
         height = float(dimension[1])     #sets the variable 'height' to a float of the second element of the dimension list
-    except:                              #excepts the folling error from the code
+    except:                              #excepts the following error from the code
         ValueError                       #excepts value error(if someone inputs in letters instead of numbers into the dimension variable)
-        sys.exit("the height of the package must only contain numbers")  #tells the user that the package must soley contain numbers and exits the program
+        sys.exit("the height of the package must only contain numbers")  #tells the user that the package must solely contain numbers and exits the program
     
     try:                                 #checks if the following indented code works
         thickness = float(dimension[2])  #sets the variable 'thickness' to a float of the third element of the dimension list
-    except:                              #excepts the folling error from the code
+    except:                              #excepts the following error from the code
         ValueError                       #excepts value error(if someone inputs in letters instead of numbers into the dimension variable)
-        sys.exit("the thickness of the package must only contain numbers")  #tells the user that the package must soley contain numbers and exits the program
+        sys.exit("the thickness of the package must only contain numbers")  #tells the user that the package must solely contain numbers and exits the program
     
     try:                                 #checks if the following indented code works
-        zip1 = int(dimension[3])         #sets the variable 'zip1' to a interger of the 4th element of the dimension list
-    except:                              #excepts the folling error from the code
+        zip1 = int(dimension[3])         #sets the variable 'zip1' to a integer of the 4th element of the dimension list
+    except:                              #excepts the following error from the code
         ValueError                       #excepts value error(if someone inputs in letters instead of numbers into the dimension variable)
-        sys.exit("the starting zipcode of the package must only contain numbers") #tells the user that the package must soley contain numbers and exits the program      
+        sys.exit("the starting zipcode of the package must only contain numbers") #tells the user that the package must solely contain numbers and exits the program      
     try:                                 #checks if the following indented code works
-        zip2 = int(dimension[4])         #sets the variable 'zip2' to a interger of the 5th element of the dimension list
-    except:                              #excepts the folling error from the code
+        zip2 = int(dimension[4])         #sets the variable 'zip2' to a integer of the 5th element of the dimension list
+    except:                              #excepts the following error from the code
         ValueError                       #excepts value error(if someone inputs in letters instead of numbers into the dimension variable)
-        sys.exit("the ending zipcode of the package must only contain numbers")   #tells the user that the package must soley contain numbers and exits the program
+        sys.exit("the ending zipcode of the package must only contain numbers")   #tells the user that the package must solely contain numbers and exits the program
 
     start_zone = get_zip(zip1)              #sets the output of the get_zip function that takes in the variable zip1 to a new variable 'start_zone'
     end_zone = get_zip(zip2)                #sets the output of the get_zip function that takes in the variable zip2 to a new variable 'end_zone'
-    zone_hops = (abs(start_zone-end_zone))  #sets zone hops variable to the absolute value of the varaible start_zone subtracted by end_zone
+    zone_hops = (abs(start_zone-end_zone))  #sets zone hops variable to the absolute value of the variable start_zone subtracted by end_zone
     
 
     size_cost = get_size(length, height, thickness)[0]  #sets the variable size cost to the first element of the list output of the get size function when taking in variable h,l,t
     zone_rate = get_size(length, height, thickness)[1]  #sets the variable zone rate to the second element of the list output of the get size function when taking in variable h,l,t
 
-    cost = (zone_hops*zone_rate+size_cost)          #sets cost equal to the fomula for the shipping cost
+    cost = round(zone_hops*zone_rate+size_cost, 2)          #sets cost equal to the formula for the shipping cost
     final_cost = str(cost).lstrip("0")              #gets rid of the leading 0 and makes cost a string
     print (final_cost)                              #prints final cost
 
