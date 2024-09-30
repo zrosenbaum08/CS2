@@ -9,6 +9,15 @@ Sources: w3 schools
 import sys #brings in the sys libray to exit the program if user doesn't meet the parameters
 #package type code
 def get_size(length, height, thickness):    # defines the get_size function that finds the size of the package that takes in variable length, height, and thickness
+    """
+    Calculates the type of package
+
+    Args:
+        length, hieght, thickness (int): The number for which the zipcode zone needs for calculation.
+
+    Returns:
+       The cost of the packaging and the cost of shipping through each zipcode zone
+"""
     if length >= 3.5 and length <= 4.25 and height >= 3.5 and height <= 6.0 and thickness >= .007 and thickness <= .016:            #if length is between, 3.5, 4.25, and height is between, 3.5, 6, and thickness is between, .007, .016, then,
         return [.20, .03] #reg post card    # returns the values .20 (steady price) and .03 (price per zipcode zone hop)
     elif length >= 4.25 and length <= 6.0 and height >= 6.0 and height <= 11.5 and thickness >= .007 and thickness <= .015:         #if the prev conditional was not met, check if length is between, 4.25, 6, and height is between, 6, 11.5, and thickness is between, .007, .015, if so, then,
@@ -24,9 +33,18 @@ def get_size(length, height, thickness):    # defines the get_size function that
     else:                                              #if the prev conditionals are not met, then,
         sys.exit("Package is UNMAILABLE because it does not fit the size requirments")  # the code exits and displays that the package is unmailable
 #zip zone code 
-def get_zip(zipcode):                       #defines the get zipcode function to see what zone a zipcode is in and takes in the parameter zipcode
+def get_zip(zipcode):
+    """
+    Calculates the zipcode zone of a zipcode
+
+    Args:
+        zipcode (int): The number for which the zipcode zone needs for calculation.
+
+    Returns:
+        the value of the zipcode ex. 2
+    """
     if zipcode < 6999 and zipcode > 1:      #if the parameter zipcode is less than 06999 and greater than 00001 then, 
-        return 1                            #returns the value 1 to the function
+        return 1                            #returns the value 1 to the function (zone 1)
     elif zipcode <19999 and zipcode > 7000: #if the prev conditional was not met, check if the parameter zipcode is less than 19999 and greater than 07000, if so, then,
         return 2                            #returns the value 2 to the function
     elif zipcode <35999 and zipcode > 20000:#if the prev conditional was not met, check if the parameter zipcode is less than 35999 and greater than 20000, if so, then,
@@ -41,6 +59,12 @@ def get_zip(zipcode):                       #defines the get zipcode function to
         sys.exit("GIVEN ZIPCODE IS NOT A REAL ZIPCODE") #exits the code and displays that the zipcode given is not an actual zip code. 
 
 def main(): # defines the main function to run to carry out the code
+    """
+    Carries out the whole program to find the cost of shipping something
+
+    Returns:
+        the cost of shipping
+    """
     dimension = input('''enter length,height,thickness,zip1,zip2 of your package (l,h,t IN INCHES):
                 ''').split(',')          #asks the user to give length,height,thickness,zip1,zip2 and turns into a list by spliting input into elements at each comma 
     try:                                 #checks if the following indented code works
@@ -83,7 +107,6 @@ def main(): # defines the main function to run to carry out the code
     cost = round(zone_hops*zone_rate+size_cost, 2)          #sets cost equal to the formula for the shipping cost
     final_cost = str(cost).lstrip("0")              #gets rid of the leading 0 and makes cost a string
     print (final_cost)                              #prints final cost
-
 
 
 
