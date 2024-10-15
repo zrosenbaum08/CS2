@@ -104,9 +104,9 @@ def main(): # defines the main function to run to carry out the code
     size_cost = get_size(length, height, thickness)[0]  #sets the variable size cost to the first element of the list output of the get size function when taking in variable h,l,t
     zone_rate = get_size(length, height, thickness)[1]  #sets the variable zone rate to the second element of the list output of the get size function when taking in variable h,l,t
 
-    cost = round(zone_hops*zone_rate+size_cost, 2)          #sets cost equal to the formula for the shipping cost
-    final_cost = str(cost).lstrip("0")              #gets rid of the leading 0 and makes cost a string
-    print (final_cost)                              #prints final cost
+    cost = round(zone_hops*zone_rate+size_cost, 2)       #sets cost equal to the formula for the shipping cost
+    final_cost = "{:,.2f}".format(cost).lstrip("0")                   #gets rid of the leading 0 and makes cost a string
+    print (final_cost)                 #prints final cost
 
 
 
