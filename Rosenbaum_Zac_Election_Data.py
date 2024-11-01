@@ -60,7 +60,7 @@ def csv_write(speech):
     with open('Names.csv', 'w', newline='') as csvfile:                 #opens csv and writes
         writer = csv.writer(csvfile)                                    #sets writer to the csv writer
         for key, value in speech.items():                               #for loop with key and value in dictionary
-            if value > 8:                                               # if the value/frequency of the word is more than 8,
+            if value > 5:                                               # if the value/frequency of the word is more than 5,
                 csvfile.writelines(key + "," + str(value) + "\n")       #writes the dictionary to the csv
             else:                                                       #if else
                 continue                                                #skips through the loop
