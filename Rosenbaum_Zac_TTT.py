@@ -303,33 +303,35 @@ def main():
     play_game = str.lower(input('''
     WELCOME! WOULD YOU LIKE TO PLAY TIC-TAC-TOE? (yes or no):  '''))    #asks user if they want to play TTT
     if play_game == "yes" or play_game == "y" or play_game == "sure" or play_game == "ok":       #if user says yes
-        two_or_one = str.lower(input('''
-    Would you like to play with 1 or 2 players:  '''))                  #Asks user if they would like to play with 1 player or 2
-        
-        if two_or_one == "1" or two_or_one == "one":                    #if else if player wants to play single player    
-            print("Player goes first")                                  #lets the player go before the computer
-            run_1game()                                                 #runs the single player game
-        
-        elif two_or_one == "2" or two_or_one == "two":                  #if user says 2
-            while True:                                                 #creates a continous loop until broken
-                rand_play = int(input('''
+        while True:
+            two_or_one = str.lower(input('''
+    Would you like to play with 1 (against computer) or 2 players:  '''))                  #Asks user if they would like to play with 1 player or 2
+            
+            if two_or_one == "1" or two_or_one == "one":                    #if else if player wants to play single player    
+                print("Player goes first")                                  #lets the player go before the computer
+                run_1game()                                                 #runs the single player game
+                break
+            elif two_or_one == "2" or two_or_one == "two":                  #if user says 2
+                while True:                                                 #creates a continous loop until broken
+                    rand_play = int(input('''
     Player 1 calls the cointoss, pick a number 1 or 2:  '''))           #asks user 1 for random number 
-                if rand_play == 1 or rand_play == 2:    #if user either inputs 1 or 2
-                    break                               #breaks the continous loop
-                else:                                   #else
-                    print("User must input either '1' or '2'")      #displays that user must either input 1 or 2
-            rand_play_num = random.randint(1,2)                     #creates random number either 1 or 2
-            print(f'''
-    The coin toss says: {rand_play_num}''')                         #prints the random number
-            if rand_play == rand_play_num:                          #if user number is euqal to random number
-                print("Player 1 you are X, go first")               #print player 1 (who picked the number) goes first
-                run_2game()                                         #runs the 2 player game
-            else:                                                   #else
-                print("Player 2 you are X, go first")               #tells player two to go first
-                run_2game()                                         #runs the 2 player game
-
-        else:
-            sys.exit("Only 1 or 2 players")    #exits program and tells user that you can only choose 1-2 players
+                    if rand_play == 1 or rand_play == 2:    #if user either inputs 1 or 2
+                        break                               #breaks the continous loop
+                    else:                                   #else
+                        print("User must input either '1' or '2'")      #displays that user must either input 1 or 2
+                rand_play_num = random.randint(1,2)                     #creates random number either 1 or 2
+                print(f'''
+    The coin toss says: {rand_play_num}''')                             #prints the random number
+                if rand_play == rand_play_num:                          #if user number is euqal to random number
+                    print("Player 1 you are X, go first")               #print player 1 (who picked the number) goes first
+                    run_2game()                                         #runs the 2 player game
+                    break
+                else:                                                   #else
+                    print("Player 2 you are X, go first")               #tells player two to go first
+                    run_2game()                                         #runs the 2 player game
+                    break
+            else:
+                print("Only 1 or 2 players")    #tells user that you can only choose 1-2 players
 
     else:                                      #else
         sys.exit("bye")                        #prints bye and exits the program (player doesn't want to play TTT)
