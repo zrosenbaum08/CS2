@@ -1,71 +1,71 @@
 import sys
 import random
 import time
-from playsound import playsound
+#from playsound import playsound
 
-board_p1 = [["🌊"] * 5 for i in range(5)]
-hid_board_p1 = [["🌊"] * 5 for i in range(5)]
-board_p2 = [["🌊"] * 5 for i in range(5)]
-hid_board_p2 = [["🌊"] * 5 for i in range(5)]
+board_p1 = [["🌊"] * 5 for i in range(5)]        #creates board for player 1
+hid_board_p1 = [["🌊"] * 5 for i in range(5)]    #creates board to show to player 2
+board_p2 = [["🌊"] * 5 for i in range(5)]        #creates board for player 2
+hid_board_p2 = [["🌊"] * 5 for i in range(5)]    #creates baord to show player 1
 
 def show_board(board, player_num):
     print(f"PLAYER {player_num}'s BOARD:")
     print("   1  2  3  4  5")
     row_num = 1
     for row in board:
-        print(str(row_num) + " " + ' '.join(row))
+        print(str(row_num) + " " + ' '.join(row))   #prints out the board with the row number
         row_num += 1
 
 def player_pieces(board, player, ship_amt):
     ships = 0
     print(f"PLAYER: {player}, PLACE SHIPS")
-    while ships < ship_amt:
-        try:
-            row = int(input("Which row? (1-5): ")) - 1
-            col = int(input("Which column? (1-5): ")) - 1
-        except ValueError:
+    while ships < ship_amt:     #continues while ships is less than what should be
+        try:                    #trys the following
+            row = int(input("Which row? (1-5): ")) - 1      #sets user input -1 to get the cordinate
+            col = int(input("Which column? (1-5): ")) - 1   #sets user input -1 to get the cordinate
+        except ValueError:          #except user input of a character not an int
             print("NUMBER ONLY")
             continue
-        if 0 <= row <= 4 and 0 <= col <= 4 and board[row][col] == "🌊":
-            board[row][col] = "🛥️ "
+        if 0 <= row <= 4 and 0 <= col <= 4 and board[row][col] == "🌊":      #makes sure user input is between 0-4
+            board[row][col] = "🛥️ "    #sets board cord to boat     
             ships += 1
-            show_board(board, player)
+            show_board(board, player)   #shows the user the board
         else:
             print("INVALID SPOT, TRY AGAIN")
 
 def comp_pieces(board, ship_amt):
     ships = 0
-    while ships < ship_amt:
-        row = random.randint(0, 4)
-        col = random.randint(0, 4)
-        if board[row][col] == "🌊":
+    while ships < ship_amt:         #continous loop while ships placed is less than what it should be
+        row = random.randint(0, 4)  #random number for computer play 0-4
+        col = random.randint(0, 4)  #random number for computer play 0-4
+        if board[row][col] == "🌊":  #checks if spot is unused
             board[row][col] = "🛥️ "
             ships += 1
 
 def guess_ship(board, hid_board, player_num):
     print(f"PLAYER: {player_num} GUESS SPOT")
     while True:
-        try:
-            row_guess = int(input("Which row? (1-5): ")) - 1
-            col_guess = int(input("Which column? (1-5): ")) - 1
-        except ValueError:
-            print("NUMBER ONLY")
+        try:                                                    #tries
+            row_guess = int(input("Which row? (1-5): ")) - 1    #sets user input -1 to get the cordinate
+            col_guess = int(input("Which column? (1-5): ")) - 1 #sets user input -1 to get the cordinate
+        except ValueError:                                      #excepts value error
+            print("NUMBER ONLY")                                
             continue
 
-        if 0 <= row_guess <= 4 and 0 <= col_guess <= 4:
-            if hid_board[row_guess][col_guess] in ["💥", "❌"]:
+        if 0 <= row_guess <= 4 and 0 <= col_guess <= 4:         #makes sure int is within 0-4
+            if hid_board[row_guess][col_guess] in ["💥", "❌"]: #checks if spot is already used
                 print("SPOT GUESSED")
                 continue
-            if "🛥️" in board[row_guess][col_guess]:
+            if "🛥️" in board[row_guess][col_guess]:             #checks if the boat is in the spot (hit)
                 print("HIT")
                 #playsound('hit_sound.wav')
-                board[row_guess][col_guess] = "💥"
+                board[row_guess][col_guess] = "💥"                   #sets both boards to explosion instead of ship
                 hid_board[row_guess][col_guess] = "💥"
                 break
-            elif board[row_guess][col_guess] == "🌊":
+            elif board[row_guess][col_guess] == "🌊":                #checks if the spot is water (miss)
                 print("MISS!")
                 #playsound('miss_sound.wav')
-                board[row_guess][col_guess] = "❌"
+                board[row_guess][col_guess] = "❌"                   #sets the board to miss
                 hid_board[row_guess][col_guess] = "❌"
                 break
         else:
@@ -73,12 +73,12 @@ def guess_ship(board, hid_board, player_num):
 
 def comp_guess(board, hid_board):
     while True:
-        row_guess = random.randrange(0,5)
-        col_guess = random.randrange(0,5)
+        row_guess = random.randrange(0,5)           #random number 0-4
+        col_guess = random.randrange(0,5)           #random number 0-4 for computer guessing the ship
 
-        if hid_board[row_guess][col_guess] in ["💥", "❌"]:
-            continue
-        if "🛥️" in board[row_guess][col_guess]:
+        if hid_board[row_guess][col_guess] in ["💥", "❌"]:   #checks if spot is guess
+            continue                                            #redoes the loop
+        if "🛥️" in board[row_guess][col_guess]:             #checks if 
             print("THE COMPUTER HIT")
             #playsound('hit_sound.wav')
             board[row_guess][col_guess] = "💥"
@@ -132,12 +132,12 @@ def two_player(board_p1, board_p2, hid_board_p1, hid_board_p2):
     else:
         print("\nTHE USER WHO GUESSED IS USER 2, THEY WILL GO SECOND, PASS COMPUTER TO PLAYER 1")
     
-    print("\nPLAYER 1, PLACE SHIPS")
+    print("\nPLAYER 1 PLACE SHIPS")
     show_board(board_p1, 1)
     player_pieces(board_p1, 1, ship_amt)
     next_turn()
 
-    print("\nPLAYER 2, PLACE SHIPS")
+    print("\nPLAYER 2 PLACE SHIPS")
     show_board(board_p2, 2)
     player_pieces(board_p2, 2, ship_amt)
     next_turn()
